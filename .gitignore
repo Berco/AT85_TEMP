@@ -12,6 +12,3 @@ Release/*.lss
 Release/*.map
 Release/*.o
 Release/*.srec
-*.atsln
-*.atsuo
-*.cproj
