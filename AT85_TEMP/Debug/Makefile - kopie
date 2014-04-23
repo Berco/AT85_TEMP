@@ -1,0 +1,75 @@
+SHELL := cmd.exe
+RM := rm -rf
+
+CHAIN := C:\Program Files (x86)\Atmel\Atmel Toolchain\AVR8 GCC\Native\3.4.2.1002\avr8-gnu-toolchain\bin\avr-
+AVR_APP_PATH :=$$$AVR_APP_PATH$$$
+QUOTE := "
+ADDITIONAL_DEPENDENCIES:=
+OUTPUT_FILE_DEP:=
+LIB_DEP:=
+
+# Add inputs and outputs from these tool invocations to the build variables
+C_SRCS +=  \
+../1wire.c \
+../AT85_TEMP.c
+
+
+OBJS +=  \
+1wire.o \
+AT85_TEMP.o
+
+OBJS_AS_ARGS +=  \
+1wire.o \
+AT85_TEMP.o
+
+C_DEPS +=  \
+1wire.d \
+AT85_TEMP.d
+
+C_DEPS_AS_ARGS +=  \
+1wire.d \
+AT85_TEMP.d
+
+OUTPUT_FILE_PATH +=AT85_TEMP.elf
+
+OUTPUT_FILE_PATH_AS_ARGS +=AT85_TEMP.elf
+
+OUTPUT_FILE_DEP:= ./makedep.mk
+
+./%.o: .././%.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 3.4.2
+	"$(CHAIN)gcc.exe"  -funsigned-char -funsigned-bitfields -DDEBUG  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=attiny85 -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<"
+	@echo WOOT!! Finished building: $<
+
+
+ifneq ($(MAKECMDGOALS),clean)
+ifneq ($(strip $(C_DEPS)),)
+-include $(C_DEPS)
+endif
+endif
+
+# All Target
+all: $(OUTPUT_FILE_PATH) $(ADDITIONAL_DEPENDENCIES)
+
+$(OUTPUT_FILE_PATH): $(OBJS) $(USER_OBJS) $(OUTPUT_FILE_DEP) $(LIB_DEP)
+	@echo And GO! Building target: $@
+	@echo Invoking: AVR/GNU Linker : 3.4.2
+	"$(CHAIN)gcc.exe" -o$(OUTPUT_FILE_PATH_AS_ARGS) $(OBJS_AS_ARGS) $(USER_OBJS) $(LIBS) -Wl,-Map="AT85_TEMP.map" -Wl,--start-group -Wl,-lm  -Wl,--end-group -Wl,--gc-sections -mmcu=attiny85
+	@echo Finished building target: $@
+	"$(CHAIN)objcopy.exe" -O ihex -R .eeprom -R .fuse -R .lock -R .signature  "AT85_TEMP.elf" "AT85_TEMP.hex"
+	"$(CHAIN)objcopy.exe" -j .eeprom  --set-section-flags=.eeprom=alloc,load --change-section-lma .eeprom=0  --no-change-warnings -O ihex "AT85_TEMP.elf" "AT85_TEMP.eep" || exit 0
+	"$(CHAIN)objdump.exe" -h -S "AT85_TEMP.elf" > "AT85_TEMP.lss"
+	"$(CHAIN)objcopy.exe" -O srec -R .eeprom -R .fuse -R .lock -R .signature  "AT85_TEMP.elf" "AT85_TEMP.srec"
+	"$(CHAIN)size.exe" "AT85_TEMP.elf"
+	
+
+# Other Targets
+clean:
+	-$(RM) $(OBJS_AS_ARGS) $(EXECUTABLES)
+	-$(RM) $(C_DEPS_AS_ARGS)
+	rm -rf "AT85_TEMP.elf" "AT85_TEMP.a" "AT85_TEMP.hex" "AT85_TEMP.lss" "AT85_TEMP.eep" "AT85_TEMP.map" "AT85_TEMP.srec"
+
+# AVR DUDE
+flash:
+	"C:\Program Files (x86)\Arduino\hardware/tools/avr/bin/avrdude.exe" -C"C:\Program Files (x86)\Arduino\hardware/tools/avr/etc/avrdude.conf" -v -v -v -v -patmega328p -carduino -P\\.\COM3 -b115200 -D -Uflash:w:"AT85_TEMP.hex":i

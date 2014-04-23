@@ -1,0 +1,1815 @@
+
+AT85_TEMP.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         000006f8  00000000  00000000  00000094  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000006  00800060  000006f8  0000078c  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          00000027  00800066  00800066  00000792  2**0
+                  ALLOC
+  3 .stab         000006cc  00000000  00000000  00000794  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  4 .stabstr      00000097  00000000  00000000  00000e60  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .comment      0000002f  00000000  00000000  00000ef7  2**0
+                  CONTENTS, READONLY
+  6 .debug_aranges 000000d0  00000000  00000000  00000f26  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_info   0000100b  00000000  00000000  00000ff6  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_abbrev 000004f6  00000000  00000000  00002001  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_line   00000643  00000000  00000000  000024f7  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_frame  00000280  00000000  00000000  00002b3c  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_str    000003b9  00000000  00000000  00002dbc  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_loc    00000dc6  00000000  00000000  00003175  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 13 .debug_ranges 000000e0  00000000  00000000  00003f3b  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0e c0       	rjmp	.+28     	; 0x1e <__ctors_end>
+   2:	28 c0       	rjmp	.+80     	; 0x54 <__bad_interrupt>
+   4:	27 c0       	rjmp	.+78     	; 0x54 <__bad_interrupt>
+   6:	26 c0       	rjmp	.+76     	; 0x54 <__bad_interrupt>
+   8:	25 c0       	rjmp	.+74     	; 0x54 <__bad_interrupt>
+   a:	24 c0       	rjmp	.+72     	; 0x54 <__bad_interrupt>
+   c:	23 c0       	rjmp	.+70     	; 0x54 <__bad_interrupt>
+   e:	22 c0       	rjmp	.+68     	; 0x54 <__bad_interrupt>
+  10:	21 c0       	rjmp	.+66     	; 0x54 <__bad_interrupt>
+  12:	20 c0       	rjmp	.+64     	; 0x54 <__bad_interrupt>
+  14:	29 c2       	rjmp	.+1106   	; 0x468 <__vector_10>
+  16:	1e c0       	rjmp	.+60     	; 0x54 <__bad_interrupt>
+  18:	1d c0       	rjmp	.+58     	; 0x54 <__bad_interrupt>
+  1a:	1c c0       	rjmp	.+56     	; 0x54 <__bad_interrupt>
+  1c:	1b c0       	rjmp	.+54     	; 0x54 <__bad_interrupt>
+
+0000001e <__ctors_end>:
+  1e:	11 24       	eor	r1, r1
+  20:	1f be       	out	0x3f, r1	; 63
+  22:	cf e5       	ldi	r28, 0x5F	; 95
+  24:	d2 e0       	ldi	r29, 0x02	; 2
+  26:	de bf       	out	0x3e, r29	; 62
+  28:	cd bf       	out	0x3d, r28	; 61
+
+0000002a <__do_copy_data>:
+  2a:	10 e0       	ldi	r17, 0x00	; 0
+  2c:	a0 e6       	ldi	r26, 0x60	; 96
+  2e:	b0 e0       	ldi	r27, 0x00	; 0
+  30:	e8 ef       	ldi	r30, 0xF8	; 248
+  32:	f6 e0       	ldi	r31, 0x06	; 6
+  34:	02 c0       	rjmp	.+4      	; 0x3a <__do_copy_data+0x10>
+  36:	05 90       	lpm	r0, Z+
+  38:	0d 92       	st	X+, r0
+  3a:	a6 36       	cpi	r26, 0x66	; 102
+  3c:	b1 07       	cpc	r27, r17
+  3e:	d9 f7       	brne	.-10     	; 0x36 <__do_copy_data+0xc>
+
+00000040 <__do_clear_bss>:
+  40:	20 e0       	ldi	r18, 0x00	; 0
+  42:	a6 e6       	ldi	r26, 0x66	; 102
+  44:	b0 e0       	ldi	r27, 0x00	; 0
+  46:	01 c0       	rjmp	.+2      	; 0x4a <.do_clear_bss_start>
+
+00000048 <.do_clear_bss_loop>:
+  48:	1d 92       	st	X+, r1
+
+0000004a <.do_clear_bss_start>:
+  4a:	ad 38       	cpi	r26, 0x8D	; 141
+  4c:	b2 07       	cpc	r27, r18
+  4e:	e1 f7       	brne	.-8      	; 0x48 <.do_clear_bss_loop>
+  50:	dc d2       	rcall	.+1464   	; 0x60a <main>
+  52:	50 c3       	rjmp	.+1696   	; 0x6f4 <_exit>
+
+00000054 <__bad_interrupt>:
+  54:	d5 cf       	rjmp	.-86     	; 0x0 <__vectors>
+
+00000056 <oneWireCrc8>:
+|*
+|* Pass a seed of 0 to start the CRC of a byte-stream. Pass the result as 
+|* the seed for subsequent bytes
+\******************************************************************************/
+unsigned char oneWireCrc8(unsigned char inData, unsigned char seed)
+	{
+  56:	98 e0       	ldi	r25, 0x08	; 8
+        temp = ((seed ^ inData) & 0x01);
+        if (temp == 0)
+            seed >>= 1;
+        else
+        	{
+            seed ^= 0x18;
+  58:	38 e1       	ldi	r19, 0x18	; 24
+    unsigned char bitsLeft;
+    unsigned char temp;
+
+    for (bitsLeft = 8; bitsLeft > 0; bitsLeft--)
+    	{
+        temp = ((seed ^ inData) & 0x01);
+  5a:	26 2f       	mov	r18, r22
+  5c:	28 27       	eor	r18, r24
+        if (temp == 0)
+  5e:	20 fd       	sbrc	r18, 0
+  60:	02 c0       	rjmp	.+4      	; 0x66 <oneWireCrc8+0x10>
+            seed >>= 1;
+  62:	66 95       	lsr	r22
+  64:	03 c0       	rjmp	.+6      	; 0x6c <oneWireCrc8+0x16>
+        else
+        	{
+            seed ^= 0x18;
+  66:	63 27       	eor	r22, r19
+            seed >>= 1;
+  68:	66 95       	lsr	r22
+            seed |= 0x80;
+  6a:	60 68       	ori	r22, 0x80	; 128
+        	}
+        inData >>= 1;
+  6c:	86 95       	lsr	r24
+  6e:	91 50       	subi	r25, 0x01	; 1
+unsigned char oneWireCrc8(unsigned char inData, unsigned char seed)
+	{
+    unsigned char bitsLeft;
+    unsigned char temp;
+
+    for (bitsLeft = 8; bitsLeft > 0; bitsLeft--)
+  70:	a1 f7       	brne	.-24     	; 0x5a <oneWireCrc8+0x4>
+            seed |= 0x80;
+        	}
+        inData >>= 1;
+    	}
+    return seed;    
+	}
+  72:	86 2f       	mov	r24, r22
+  74:	08 95       	ret
+
+00000076 <oneWireRomCrc>:
+	
+/******************************************************************************\
+|* Compute and check the CRC for a ROM identifier 
+\******************************************************************************/
+unsigned char oneWireRomCrc(unsigned char * romValue)
+	{
+  76:	ef 92       	push	r14
+  78:	ff 92       	push	r15
+  7a:	0f 93       	push	r16
+  7c:	1f 93       	push	r17
+  7e:	cf 93       	push	r28
+  80:	df 93       	push	r29
+  82:	7c 01       	movw	r14, r24
+	}
+	
+/******************************************************************************\
+|* Compute and check the CRC for a ROM identifier 
+\******************************************************************************/
+unsigned char oneWireRomCrc(unsigned char * romValue)
+  84:	8c 01       	movw	r16, r24
+  86:	09 5f       	subi	r16, 0xF9	; 249
+  88:	1f 4f       	sbci	r17, 0xFF	; 255
+  8a:	ec 01       	movw	r28, r24
+	{
+    unsigned char i;
+    unsigned char crc8 = 0;
+  8c:	60 e0       	ldi	r22, 0x00	; 0
+    
+    for (i = 0; i < 7; i++)
+    	{
+        crc8 = oneWireCrc8(*romValue, crc8);
+  8e:	89 91       	ld	r24, Y+
+  90:	e2 df       	rcall	.-60     	; 0x56 <oneWireCrc8>
+  92:	68 2f       	mov	r22, r24
+unsigned char oneWireRomCrc(unsigned char * romValue)
+	{
+    unsigned char i;
+    unsigned char crc8 = 0;
+    
+    for (i = 0; i < 7; i++)
+  94:	c0 17       	cp	r28, r16
+  96:	d1 07       	cpc	r29, r17
+  98:	d1 f7       	brne	.-12     	; 0x8e <oneWireRomCrc+0x18>
+    	{
+        crc8 = oneWireCrc8(*romValue, crc8);
+        romValue++;
+    	}
+    if (crc8 == (*romValue))
+  9a:	81 e0       	ldi	r24, 0x01	; 1
+  9c:	f7 01       	movw	r30, r14
+  9e:	97 81       	ldd	r25, Z+7	; 0x07
+  a0:	69 13       	cpse	r22, r25
+  a2:	01 c0       	rjmp	.+2      	; 0xa6 <oneWireRomCrc+0x30>
+  a4:	80 e0       	ldi	r24, 0x00	; 0
+    	{
+        return ONEWIRE_OK;
+    	}
+    return ONEWIRE_ERROR;
+	}
+  a6:	df 91       	pop	r29
+  a8:	cf 91       	pop	r28
+  aa:	1f 91       	pop	r17
+  ac:	0f 91       	pop	r16
+  ae:	ff 90       	pop	r15
+  b0:	ef 90       	pop	r14
+  b2:	08 95       	ret
+
+000000b4 <oneWireInit>:
+/******************************************************************************\
+|* Initialise everything
+\******************************************************************************/
+void oneWireInit(unsigned char pins)
+	{
+    ONEWIRE_RELEASE_BUS(pins);
+  b4:	97 b3       	in	r25, 0x17	; 23
+  b6:	80 95       	com	r24
+  b8:	98 23       	and	r25, r24
+  ba:	97 bb       	out	0x17, r25	; 23
+  bc:	98 b3       	in	r25, 0x18	; 24
+  be:	89 23       	and	r24, r25
+  c0:	88 bb       	out	0x18, r24	; 24
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+  c2:	8f eb       	ldi	r24, 0xBF	; 191
+  c4:	93 e0       	ldi	r25, 0x03	; 3
+  c6:	01 97       	sbiw	r24, 0x01	; 1
+  c8:	f1 f7       	brne	.-4      	; 0xc6 <oneWireInit+0x12>
+  ca:	00 c0       	rjmp	.+0      	; 0xcc <oneWireInit+0x18>
+  cc:	00 00       	nop
+  ce:	08 95       	ret
+
+000000d0 <oneWireWriteBit1>:
+|* Write a '1' bit to the bus(es)
+\******************************************************************************/
+void oneWireWriteBit1(unsigned char pins)
+	{    
+    // Disable interrupts.
+    uint8_t sreg = SREG;
+  d0:	9f b7       	in	r25, 0x3f	; 63
+    cli();
+  d2:	f8 94       	cli
+    
+    // Drive bus low and delay.
+    ONEWIRE_PULL_BUS_LOW(pins);
+  d4:	27 b3       	in	r18, 0x17	; 23
+  d6:	28 2b       	or	r18, r24
+  d8:	27 bb       	out	0x17, r18	; 23
+  da:	28 b3       	in	r18, 0x18	; 24
+  dc:	80 95       	com	r24
+  de:	28 23       	and	r18, r24
+  e0:	28 bb       	out	0x18, r18	; 24
+  e2:	20 e1       	ldi	r18, 0x10	; 16
+  e4:	2a 95       	dec	r18
+  e6:	f1 f7       	brne	.-4      	; 0xe4 <oneWireWriteBit1+0x14>
+    _delay_us(ONEWIRE_DELAY_6);
+    
+    // Release bus and delay.
+    ONEWIRE_RELEASE_BUS(pins);
+  e8:	27 b3       	in	r18, 0x17	; 23
+  ea:	28 23       	and	r18, r24
+  ec:	27 bb       	out	0x17, r18	; 23
+  ee:	28 b3       	in	r18, 0x18	; 24
+  f0:	82 23       	and	r24, r18
+  f2:	88 bb       	out	0x18, r24	; 24
+  f4:	8a ea       	ldi	r24, 0xAA	; 170
+  f6:	8a 95       	dec	r24
+  f8:	f1 f7       	brne	.-4      	; 0xf6 <oneWireWriteBit1+0x26>
+  fa:	00 c0       	rjmp	.+0      	; 0xfc <oneWireWriteBit1+0x2c>
+    _delay_us(ONEWIRE_DELAY_64);
+    
+    // Restore interrupts.
+    SREG=sreg;
+  fc:	9f bf       	out	0x3f, r25	; 63
+  fe:	08 95       	ret
+
+00000100 <oneWireWriteBit0>:
+|* Write a '0' bit to the bus(es)
+\******************************************************************************/
+void oneWireWriteBit0(unsigned char pins)
+	{
+    // Disable interrupts.
+    uint8_t sreg = SREG;
+ 100:	9f b7       	in	r25, 0x3f	; 63
+    cli();
+ 102:	f8 94       	cli
+  
+    // Drive bus low and delay.
+    ONEWIRE_PULL_BUS_LOW(pins);
+ 104:	27 b3       	in	r18, 0x17	; 23
+ 106:	28 2b       	or	r18, r24
+ 108:	27 bb       	out	0x17, r18	; 23
+ 10a:	28 b3       	in	r18, 0x18	; 24
+ 10c:	80 95       	com	r24
+ 10e:	28 23       	and	r18, r24
+ 110:	28 bb       	out	0x18, r18	; 24
+ 112:	20 ea       	ldi	r18, 0xA0	; 160
+ 114:	2a 95       	dec	r18
+ 116:	f1 f7       	brne	.-4      	; 0x114 <oneWireWriteBit0+0x14>
+    _delay_us(ONEWIRE_DELAY_60);
+    
+    // Release bus and delay.
+    ONEWIRE_RELEASE_BUS(pins);
+ 118:	27 b3       	in	r18, 0x17	; 23
+ 11a:	28 23       	and	r18, r24
+ 11c:	27 bb       	out	0x17, r18	; 23
+ 11e:	28 b3       	in	r18, 0x18	; 24
+ 120:	82 23       	and	r24, r18
+ 122:	88 bb       	out	0x18, r24	; 24
+ 124:	8a e1       	ldi	r24, 0x1A	; 26
+ 126:	8a 95       	dec	r24
+ 128:	f1 f7       	brne	.-4      	; 0x126 <oneWireWriteBit0+0x26>
+ 12a:	00 c0       	rjmp	.+0      	; 0x12c <oneWireWriteBit0+0x2c>
+    _delay_us(ONEWIRE_DELAY_10);
+    
+    // Restore interrupts.
+    SREG=sreg;
+ 12c:	9f bf       	out	0x3f, r25	; 63
+ 12e:	08 95       	ret
+
+00000130 <oneWireSendByte>:
+	
+/******************************************************************************\
+|* Sends one byte of data on the 1-Wire(R) bus(es).
+\******************************************************************************/
+void oneWireSendByte(unsigned char data, unsigned char pins)
+	{
+ 130:	1f 93       	push	r17
+ 132:	cf 93       	push	r28
+ 134:	df 93       	push	r29
+ 136:	d8 2f       	mov	r29, r24
+ 138:	16 2f       	mov	r17, r22
+ 13a:	c8 e0       	ldi	r28, 0x08	; 8
+    for (i = 0; i < 8; i++)
+    	{
+        // Determine if lsb is '0' or '1' and transmit corresponding
+        // waveform on the bus.
+        temp = data & 0x01;
+        if (temp)
+ 13c:	d0 ff       	sbrs	r29, 0
+ 13e:	03 c0       	rjmp	.+6      	; 0x146 <oneWireSendByte+0x16>
+            oneWireWriteBit1(pins);
+ 140:	81 2f       	mov	r24, r17
+ 142:	c6 df       	rcall	.-116    	; 0xd0 <oneWireWriteBit1>
+ 144:	02 c0       	rjmp	.+4      	; 0x14a <oneWireSendByte+0x1a>
+        else
+            oneWireWriteBit0(pins);
+ 146:	81 2f       	mov	r24, r17
+ 148:	db df       	rcall	.-74     	; 0x100 <oneWireWriteBit0>
+        
+		// Right shift the data to get next bit.
+        data >>= 1;
+ 14a:	d6 95       	lsr	r29
+ 14c:	c1 50       	subi	r28, 0x01	; 1
+	{
+    unsigned char temp;
+    unsigned char i;
+    
+    // Do once for each bit
+    for (i = 0; i < 8; i++)
+ 14e:	b1 f7       	brne	.-20     	; 0x13c <oneWireSendByte+0xc>
+            oneWireWriteBit0(pins);
+        
+		// Right shift the data to get next bit.
+        data >>= 1;
+    	}
+	}
+ 150:	df 91       	pop	r29
+ 152:	cf 91       	pop	r28
+ 154:	1f 91       	pop	r17
+ 156:	08 95       	ret
+
+00000158 <oneWireMatchRom>:
+
+/******************************************************************************\
+|* Sends the MATCH ROM command to the 1-Wire bus(es).
+\******************************************************************************/
+void oneWireMatchRom(unsigned char * romValue, unsigned char pins)
+	{
+ 158:	ff 92       	push	r15
+ 15a:	0f 93       	push	r16
+ 15c:	1f 93       	push	r17
+ 15e:	cf 93       	push	r28
+ 160:	df 93       	push	r29
+ 162:	ec 01       	movw	r28, r24
+ 164:	f6 2e       	mov	r15, r22
+    unsigned char bytesLeft = 8;   
+    
+    // Send the MATCH ROM command.
+    oneWireSendByte(ONEWIRE_MATCH, pins);
+ 166:	85 e5       	ldi	r24, 0x55	; 85
+ 168:	e3 df       	rcall	.-58     	; 0x130 <oneWireSendByte>
+	}
+
+/******************************************************************************\
+|* Sends the MATCH ROM command to the 1-Wire bus(es).
+\******************************************************************************/
+void oneWireMatchRom(unsigned char * romValue, unsigned char pins)
+ 16a:	8e 01       	movw	r16, r28
+ 16c:	08 5f       	subi	r16, 0xF8	; 248
+ 16e:	1f 4f       	sbci	r17, 0xFF	; 255
+
+    // Do once for each byte.
+    while (bytesLeft > 0)
+    	{
+        // Transmit 1 byte of the ID to match.
+        oneWireSendByte(*romValue++, pins);
+ 170:	6f 2d       	mov	r22, r15
+ 172:	89 91       	ld	r24, Y+
+ 174:	dd df       	rcall	.-70     	; 0x130 <oneWireSendByte>
+    
+    // Send the MATCH ROM command.
+    oneWireSendByte(ONEWIRE_MATCH, pins);
+
+    // Do once for each byte.
+    while (bytesLeft > 0)
+ 176:	c0 17       	cp	r28, r16
+ 178:	d1 07       	cpc	r29, r17
+ 17a:	d1 f7       	brne	.-12     	; 0x170 <oneWireMatchRom+0x18>
+    	{
+        // Transmit 1 byte of the ID to match.
+        oneWireSendByte(*romValue++, pins);
+        bytesLeft--;
+    	}
+	}
+ 17c:	df 91       	pop	r29
+ 17e:	cf 91       	pop	r28
+ 180:	1f 91       	pop	r17
+ 182:	0f 91       	pop	r16
+ 184:	ff 90       	pop	r15
+ 186:	08 95       	ret
+
+00000188 <oneWireReadBit>:
+unsigned char oneWireReadBit(unsigned char pins)
+	{
+    unsigned char bitsRead;
+    
+    // Disable interrupts.
+    uint8_t sreg = SREG;
+ 188:	2f b7       	in	r18, 0x3f	; 63
+    cli();
+ 18a:	f8 94       	cli
+    
+    // Drive bus low and delay.
+    ONEWIRE_PULL_BUS_LOW(pins);
+ 18c:	97 b3       	in	r25, 0x17	; 23
+ 18e:	98 2b       	or	r25, r24
+ 190:	97 bb       	out	0x17, r25	; 23
+ 192:	38 b3       	in	r19, 0x18	; 24
+ 194:	98 2f       	mov	r25, r24
+ 196:	90 95       	com	r25
+ 198:	39 23       	and	r19, r25
+ 19a:	38 bb       	out	0x18, r19	; 24
+ 19c:	30 e1       	ldi	r19, 0x10	; 16
+ 19e:	3a 95       	dec	r19
+ 1a0:	f1 f7       	brne	.-4      	; 0x19e <oneWireReadBit+0x16>
+    _delay_us(ONEWIRE_DELAY_6);
+    
+    // Release bus and delay.
+    ONEWIRE_RELEASE_BUS(pins);
+ 1a2:	37 b3       	in	r19, 0x17	; 23
+ 1a4:	39 23       	and	r19, r25
+ 1a6:	37 bb       	out	0x17, r19	; 23
+ 1a8:	38 b3       	in	r19, 0x18	; 24
+ 1aa:	93 23       	and	r25, r19
+ 1ac:	98 bb       	out	0x18, r25	; 24
+ 1ae:	98 e1       	ldi	r25, 0x18	; 24
+ 1b0:	9a 95       	dec	r25
+ 1b2:	f1 f7       	brne	.-4      	; 0x1b0 <oneWireReadBit+0x28>
+    _delay_us(ONEWIRE_DELAY_9);
+    
+    // Sample bus and delay.
+    bitsRead = ONEWIRE_PIN & pins;
+ 1b4:	96 b3       	in	r25, 0x16	; 22
+ 1b6:	32 e9       	ldi	r19, 0x92	; 146
+ 1b8:	3a 95       	dec	r19
+ 1ba:	f1 f7       	brne	.-4      	; 0x1b8 <oneWireReadBit+0x30>
+ 1bc:	00 c0       	rjmp	.+0      	; 0x1be <oneWireReadBit+0x36>
+    _delay_us(ONEWIRE_DELAY_55);
+    
+    // Restore interrupts.
+    SREG=sreg;
+ 1be:	2f bf       	out	0x3f, r18	; 63
+    
+    return bitsRead;
+	}
+ 1c0:	89 23       	and	r24, r25
+ 1c2:	08 95       	ret
+
+000001c4 <oneWireSearchRom>:
+|* subsequent calls. Pin is the bus to use
+\******************************************************************************/
+unsigned char oneWireSearchRom(unsigned char * bitPattern, 
+							   unsigned char lastDeviation, 
+							   unsigned char pin)
+	{
+ 1c4:	bf 92       	push	r11
+ 1c6:	cf 92       	push	r12
+ 1c8:	df 92       	push	r13
+ 1ca:	ef 92       	push	r14
+ 1cc:	ff 92       	push	r15
+ 1ce:	0f 93       	push	r16
+ 1d0:	1f 93       	push	r17
+ 1d2:	cf 93       	push	r28
+ 1d4:	df 93       	push	r29
+ 1d6:	ec 01       	movw	r28, r24
+ 1d8:	c6 2e       	mov	r12, r22
+ 1da:	f4 2e       	mov	r15, r20
+	//unsigned char bitsA[65];
+	//unsigned char bitsB[65];
+	//bitsA[64] = bitsB[64] = '\0';
+
+    // Send SEARCH ROM command on the bus.
+    oneWireSendByte(ONEWIRE_SEARCH, pin);
+ 1dc:	64 2f       	mov	r22, r20
+ 1de:	80 ef       	ldi	r24, 0xF0	; 240
+ 1e0:	a7 df       	rcall	.-178    	; 0x130 <oneWireSendByte>
+							   unsigned char lastDeviation, 
+							   unsigned char pin)
+	{
+    unsigned char currentBit = 1;
+    unsigned char newDeviation = 0;
+    unsigned char bitMask = 0x01;
+ 1e2:	11 e0       	ldi	r17, 0x01	; 1
+unsigned char oneWireSearchRom(unsigned char * bitPattern, 
+							   unsigned char lastDeviation, 
+							   unsigned char pin)
+	{
+    unsigned char currentBit = 1;
+    unsigned char newDeviation = 0;
+ 1e4:	b1 2c       	mov	r11, r1
+\******************************************************************************/
+unsigned char oneWireSearchRom(unsigned char * bitPattern, 
+							   unsigned char lastDeviation, 
+							   unsigned char pin)
+	{
+    unsigned char currentBit = 1;
+ 1e6:	01 e0       	ldi	r16, 0x01	; 1
+
+        // Adjust bitMask and bitPattern pointer.    
+        bitMask <<= 1;
+        if (!bitMask)
+        	{
+            bitMask = 0x01;
+ 1e8:	dd 24       	eor	r13, r13
+ 1ea:	d3 94       	inc	r13
+    
+    // Walk through all 64 bits.
+    while (currentBit <= 64)
+    	{
+        // Read bit from bus twice.
+        bitA = oneWireReadBit(pin);
+ 1ec:	8f 2d       	mov	r24, r15
+ 1ee:	cc df       	rcall	.-104    	; 0x188 <oneWireReadBit>
+ 1f0:	e8 2e       	mov	r14, r24
+        bitB = oneWireReadBit(pin);
+ 1f2:	8f 2d       	mov	r24, r15
+ 1f4:	c9 df       	rcall	.-110    	; 0x188 <oneWireReadBit>
+		
+		//bitsA[currentBit-1] = (bitA ) ? '1':'0';
+		//bitsB[currentBit-1] = (bitB ) ? '1':'0';
+
+        if (bitA && bitB)
+ 1f6:	ee 20       	and	r14, r14
+ 1f8:	99 f1       	breq	.+102    	; 0x260 <__stack+0x1>
+ 1fa:	81 11       	cpse	r24, r1
+ 1fc:	2e c0       	rjmp	.+92     	; 0x25a <oneWireSearchRom+0x96>
+        	{
+            // Bits A and B are different. All devices have the same bit here.
+            // Set the bit in bitPattern to this value.
+            if (bitA)
+            	{
+                (*bitPattern) |= bitMask;
+ 1fe:	98 81       	ld	r25, Y
+ 200:	91 2b       	or	r25, r17
+ 202:	98 83       	st	Y, r25
+ 204:	19 c0       	rjmp	.+50     	; 0x238 <oneWireSearchRom+0x74>
+            	}
+            else
+            	{
+                (*bitPattern) &= ~bitMask;
+ 206:	91 2f       	mov	r25, r17
+ 208:	90 95       	com	r25
+ 20a:	28 81       	ld	r18, Y
+ 20c:	92 23       	and	r25, r18
+ 20e:	98 83       	st	Y, r25
+ 210:	13 c0       	rjmp	.+38     	; 0x238 <oneWireSearchRom+0x74>
+        	}
+        else // Both bits 0
+        	{
+            // If this is where a choice was made the last time,
+            // a '1' bit is selected this time.
+            if (currentBit == lastDeviation)
+ 212:	0c 11       	cpse	r16, r12
+ 214:	04 c0       	rjmp	.+8      	; 0x21e <oneWireSearchRom+0x5a>
+                (*bitPattern) |= bitMask;
+ 216:	88 81       	ld	r24, Y
+ 218:	81 2b       	or	r24, r17
+ 21a:	88 83       	st	Y, r24
+ 21c:	0d c0       	rjmp	.+26     	; 0x238 <oneWireSearchRom+0x74>
+
+            // For the rest of the id, '0' bits are selected when
+            // discrepancies occur.
+            else if (currentBit > lastDeviation)
+ 21e:	c0 16       	cp	r12, r16
+ 220:	38 f4       	brcc	.+14     	; 0x230 <oneWireSearchRom+0x6c>
+            	{
+                (*bitPattern) &= ~bitMask;
+ 222:	81 2f       	mov	r24, r17
+ 224:	80 95       	com	r24
+ 226:	98 81       	ld	r25, Y
+ 228:	89 23       	and	r24, r25
+ 22a:	88 83       	st	Y, r24
+ 22c:	b0 2e       	mov	r11, r16
+ 22e:	04 c0       	rjmp	.+8      	; 0x238 <oneWireSearchRom+0x74>
+                newDeviation = currentBit;
+            	}
+            // If current bit in bit pattern = 0, then this is
+            // out new deviation.
+            else if ( !(*bitPattern & bitMask)) 
+ 230:	88 81       	ld	r24, Y
+ 232:	81 23       	and	r24, r17
+ 234:	39 f0       	breq	.+14     	; 0x244 <oneWireSearchRom+0x80>
+ 236:	03 c0       	rjmp	.+6      	; 0x23e <oneWireSearchRom+0x7a>
+            	{}
+        	}
+                
+        
+        // Send the selected bit to the bus.
+        if ((*bitPattern) & bitMask)
+ 238:	98 81       	ld	r25, Y
+ 23a:	91 23       	and	r25, r17
+ 23c:	21 f0       	breq	.+8      	; 0x246 <oneWireSearchRom+0x82>
+            oneWireWriteBit1(pin);
+ 23e:	8f 2d       	mov	r24, r15
+ 240:	47 df       	rcall	.-370    	; 0xd0 <oneWireWriteBit1>
+ 242:	03 c0       	rjmp	.+6      	; 0x24a <oneWireSearchRom+0x86>
+                (*bitPattern) &= ~bitMask;
+                newDeviation = currentBit;
+            	}
+            // If current bit in bit pattern = 0, then this is
+            // out new deviation.
+            else if ( !(*bitPattern & bitMask)) 
+ 244:	b0 2e       	mov	r11, r16
+        
+        // Send the selected bit to the bus.
+        if ((*bitPattern) & bitMask)
+            oneWireWriteBit1(pin);
+        else
+            oneWireWriteBit0(pin);
+ 246:	8f 2d       	mov	r24, r15
+ 248:	5b df       	rcall	.-330    	; 0x100 <oneWireWriteBit0>
+
+        // Increment current bit.    
+        currentBit++;
+ 24a:	0f 5f       	subi	r16, 0xFF	; 255
+
+        // Adjust bitMask and bitPattern pointer.    
+        bitMask <<= 1;
+ 24c:	11 0f       	add	r17, r17
+        if (!bitMask)
+ 24e:	11 f4       	brne	.+4      	; 0x254 <oneWireSearchRom+0x90>
+        	{
+            bitMask = 0x01;
+            bitPattern++;
+ 250:	21 96       	adiw	r28, 0x01	; 1
+
+        // Adjust bitMask and bitPattern pointer.    
+        bitMask <<= 1;
+        if (!bitMask)
+        	{
+            bitMask = 0x01;
+ 252:	1d 2d       	mov	r17, r13
+
+    // Send SEARCH ROM command on the bus.
+    oneWireSendByte(ONEWIRE_SEARCH, pin);
+    
+    // Walk through all 64 bits.
+    while (currentBit <= 64)
+ 254:	01 34       	cpi	r16, 0x41	; 65
+ 256:	51 f6       	brne	.-108    	; 0x1ec <oneWireSearchRom+0x28>
+ 258:	06 c0       	rjmp	.+12     	; 0x266 <__stack+0x7>
+
+        if (bitA && bitB)
+        	{
+            // Both bits 1 (Error).
+            newDeviation = ONEWIRE_SEARCH_FAILED;
+            return ONEWIRE_SEARCH_FAILED;
+ 25a:	bb 24       	eor	r11, r11
+ 25c:	ba 94       	dec	r11
+ 25e:	03 c0       	rjmp	.+6      	; 0x266 <__stack+0x7>
+        	}
+        else if (bitA ^ bitB)
+ 260:	81 11       	cpse	r24, r1
+ 262:	d1 cf       	rjmp	.-94     	; 0x206 <oneWireSearchRom+0x42>
+ 264:	d6 cf       	rjmp	.-84     	; 0x212 <oneWireSearchRom+0x4e>
+        	}	
+    	}
+	//printf("A:%s\nB:%s\n\n", bitsA, bitsB);
+	//_delay_ms(10000);
+    return newDeviation;
+	}
+ 266:	8b 2d       	mov	r24, r11
+ 268:	df 91       	pop	r29
+ 26a:	cf 91       	pop	r28
+ 26c:	1f 91       	pop	r17
+ 26e:	0f 91       	pop	r16
+ 270:	ff 90       	pop	r15
+ 272:	ef 90       	pop	r14
+ 274:	df 90       	pop	r13
+ 276:	cf 90       	pop	r12
+ 278:	bf 90       	pop	r11
+ 27a:	08 95       	ret
+
+0000027c <oneWireReceiveByte>:
+	
+/******************************************************************************\
+|* Receives one byte of data from the 1-Wire(R) bus.
+\******************************************************************************/
+unsigned char oneWireReceiveByte(unsigned char pin)
+	{
+ 27c:	1f 93       	push	r17
+ 27e:	cf 93       	push	r28
+ 280:	df 93       	push	r29
+ 282:	18 2f       	mov	r17, r24
+ 284:	d8 e0       	ldi	r29, 0x08	; 8
+    unsigned char data;
+    unsigned char i;
+
+    // Clear the temporary input variable.
+    data = 0x00;
+ 286:	c0 e0       	ldi	r28, 0x00	; 0
+    
+    // Do once for each bit
+    for (i = 0; i < 8; i++)
+    	{
+        // Shift temporary input variable right.
+        data >>= 1;
+ 288:	c6 95       	lsr	r28
+        
+		// Set the msb if a '1' value is read from the bus.
+        if (oneWireReadBit(pin))
+ 28a:	81 2f       	mov	r24, r17
+ 28c:	7d df       	rcall	.-262    	; 0x188 <oneWireReadBit>
+ 28e:	81 11       	cpse	r24, r1
+            data |= 0x80;
+ 290:	c0 68       	ori	r28, 0x80	; 128
+ 292:	d1 50       	subi	r29, 0x01	; 1
+
+    // Clear the temporary input variable.
+    data = 0x00;
+    
+    // Do once for each bit
+    for (i = 0; i < 8; i++)
+ 294:	c9 f7       	brne	.-14     	; 0x288 <oneWireReceiveByte+0xc>
+        if (oneWireReadBit(pin))
+            data |= 0x80;
+        
+    	}
+    return data;
+	}
+ 296:	8c 2f       	mov	r24, r28
+ 298:	df 91       	pop	r29
+ 29a:	cf 91       	pop	r28
+ 29c:	1f 91       	pop	r17
+ 29e:	08 95       	ret
+
+000002a0 <oneWireDetectPresence>:
+unsigned char oneWireDetectPresence(unsigned char pins)
+	{
+    unsigned char presenceDetected;
+    
+     // Disable interrupts.
+    uint8_t sreg = SREG;
+ 2a0:	2f b7       	in	r18, 0x3f	; 63
+    cli();
+ 2a2:	f8 94       	cli
+
+     // Drive bus low and delay.
+    ONEWIRE_PULL_BUS_LOW(pins);
+ 2a4:	97 b3       	in	r25, 0x17	; 23
+ 2a6:	98 2b       	or	r25, r24
+ 2a8:	97 bb       	out	0x17, r25	; 23
+ 2aa:	38 b3       	in	r19, 0x18	; 24
+ 2ac:	98 2f       	mov	r25, r24
+ 2ae:	90 95       	com	r25
+ 2b0:	39 23       	and	r19, r25
+ 2b2:	38 bb       	out	0x18, r19	; 24
+ 2b4:	ef eb       	ldi	r30, 0xBF	; 191
+ 2b6:	f3 e0       	ldi	r31, 0x03	; 3
+ 2b8:	31 97       	sbiw	r30, 0x01	; 1
+ 2ba:	f1 f7       	brne	.-4      	; 0x2b8 <oneWireDetectPresence+0x18>
+ 2bc:	00 c0       	rjmp	.+0      	; 0x2be <oneWireDetectPresence+0x1e>
+ 2be:	00 00       	nop
+    _delay_us(ONEWIRE_DELAY_480);
+      
+    // Release bus and delay.
+    ONEWIRE_RELEASE_BUS(pins);
+ 2c0:	37 b3       	in	r19, 0x17	; 23
+ 2c2:	39 23       	and	r19, r25
+ 2c4:	37 bb       	out	0x17, r19	; 23
+ 2c6:	38 b3       	in	r19, 0x18	; 24
+ 2c8:	93 23       	and	r25, r19
+ 2ca:	98 bb       	out	0x18, r25	; 24
+ 2cc:	fa eb       	ldi	r31, 0xBA	; 186
+ 2ce:	fa 95       	dec	r31
+ 2d0:	f1 f7       	brne	.-4      	; 0x2ce <oneWireDetectPresence+0x2e>
+ 2d2:	00 c0       	rjmp	.+0      	; 0x2d4 <oneWireDetectPresence+0x34>
+    _delay_us(ONEWIRE_DELAY_70);
+    
+    // Sample bus to detect presence signal and delay.
+    presenceDetected = ((~ONEWIRE_PIN) & pins);
+ 2d4:	96 b3       	in	r25, 0x16	; 22
+ 2d6:	e3 e3       	ldi	r30, 0x33	; 51
+ 2d8:	f3 e0       	ldi	r31, 0x03	; 3
+ 2da:	31 97       	sbiw	r30, 0x01	; 1
+ 2dc:	f1 f7       	brne	.-4      	; 0x2da <oneWireDetectPresence+0x3a>
+ 2de:	00 c0       	rjmp	.+0      	; 0x2e0 <oneWireDetectPresence+0x40>
+ 2e0:	00 00       	nop
+    _delay_us(ONEWIRE_DELAY_410);
+    
+    // Restore interrupts.
+    SREG=sreg;
+ 2e2:	2f bf       	out	0x3f, r18	; 63
+    // Release bus and delay.
+    ONEWIRE_RELEASE_BUS(pins);
+    _delay_us(ONEWIRE_DELAY_70);
+    
+    // Sample bus to detect presence signal and delay.
+    presenceDetected = ((~ONEWIRE_PIN) & pins);
+ 2e4:	90 95       	com	r25
+    
+    // Restore interrupts.
+    SREG=sreg;
+    
+    return presenceDetected;
+	}
+ 2e6:	89 23       	and	r24, r25
+ 2e8:	08 95       	ret
+
+000002ea <oneWireSearchBuses>:
+|* Returns ONEWIRE_SEARCH_COMPLETE on success, ONEWIRE_SEARCH_FAILED on error
+\******************************************************************************/
+unsigned char oneWireSearchBuses(oneWireDevice * devices, 
+								 unsigned char len, 
+								 unsigned char buses)
+	{
+ 2ea:	8f 92       	push	r8
+ 2ec:	9f 92       	push	r9
+ 2ee:	af 92       	push	r10
+ 2f0:	bf 92       	push	r11
+ 2f2:	cf 92       	push	r12
+ 2f4:	df 92       	push	r13
+ 2f6:	ef 92       	push	r14
+ 2f8:	ff 92       	push	r15
+ 2fa:	0f 93       	push	r16
+ 2fc:	1f 93       	push	r17
+ 2fe:	cf 93       	push	r28
+ 300:	df 93       	push	r29
+ 302:	8c 01       	movw	r16, r24
+ 304:	84 2f       	mov	r24, r20
+	/**************************************************************************\
+	|* Initialize all addresses as zero, on bus 0 (does not exist).
+	\**************************************************************************/
+    for (uint8_t i = 0; i < len; i++)
+ 306:	66 23       	and	r22, r22
+ 308:	01 f1       	breq	.+64     	; 0x34a <oneWireSearchBuses+0x60>
+
+/******************************************************************************\
+|* Perform a 1-wire search on the identified buses. 
+|* Returns ONEWIRE_SEARCH_COMPLETE on success, ONEWIRE_SEARCH_FAILED on error
+\******************************************************************************/
+unsigned char oneWireSearchBuses(oneWireDevice * devices, 
+ 30a:	f8 01       	movw	r30, r16
+ 30c:	38 96       	adiw	r30, 0x08	; 8
+								 unsigned char buses)
+	{
+	/**************************************************************************\
+	|* Initialize all addresses as zero, on bus 0 (does not exist).
+	\**************************************************************************/
+    for (uint8_t i = 0; i < len; i++)
+ 30e:	90 e0       	ldi	r25, 0x00	; 0
+
+/******************************************************************************\
+|* Perform a 1-wire search on the identified buses. 
+|* Returns ONEWIRE_SEARCH_COMPLETE on success, ONEWIRE_SEARCH_FAILED on error
+\******************************************************************************/
+unsigned char oneWireSearchBuses(oneWireDevice * devices, 
+ 310:	df 01       	movw	r26, r30
+ 312:	18 97       	sbiw	r26, 0x08	; 8
+	/**************************************************************************\
+	|* Initialize all addresses as zero, on bus 0 (does not exist).
+	\**************************************************************************/
+    for (uint8_t i = 0; i < len; i++)
+    	{
+        devices[i].bus = 0x00;
+ 314:	1c 92       	st	X, r1
+
+/******************************************************************************\
+|* Perform a 1-wire search on the identified buses. 
+|* Returns ONEWIRE_SEARCH_COMPLETE on success, ONEWIRE_SEARCH_FAILED on error
+\******************************************************************************/
+unsigned char oneWireSearchBuses(oneWireDevice * devices, 
+ 316:	df 01       	movw	r26, r30
+ 318:	17 97       	sbiw	r26, 0x07	; 7
+	\**************************************************************************/
+    for (uint8_t i = 0; i < len; i++)
+    	{
+        devices[i].bus = 0x00;
+        for (uint8_t j = 0; j < 8; j++)
+            devices[i].id[j] = 0x00;
+ 31a:	1c 92       	st	X, r1
+
+/******************************************************************************\
+|* Perform a 1-wire search on the identified buses. 
+|* Returns ONEWIRE_SEARCH_COMPLETE on success, ONEWIRE_SEARCH_FAILED on error
+\******************************************************************************/
+unsigned char oneWireSearchBuses(oneWireDevice * devices, 
+ 31c:	df 01       	movw	r26, r30
+ 31e:	16 97       	sbiw	r26, 0x06	; 6
+	\**************************************************************************/
+    for (uint8_t i = 0; i < len; i++)
+    	{
+        devices[i].bus = 0x00;
+        for (uint8_t j = 0; j < 8; j++)
+            devices[i].id[j] = 0x00;
+ 320:	1c 92       	st	X, r1
+
+/******************************************************************************\
+|* Perform a 1-wire search on the identified buses. 
+|* Returns ONEWIRE_SEARCH_COMPLETE on success, ONEWIRE_SEARCH_FAILED on error
+\******************************************************************************/
+unsigned char oneWireSearchBuses(oneWireDevice * devices, 
+ 322:	df 01       	movw	r26, r30
+ 324:	15 97       	sbiw	r26, 0x05	; 5
+	\**************************************************************************/
+    for (uint8_t i = 0; i < len; i++)
+    	{
+        devices[i].bus = 0x00;
+        for (uint8_t j = 0; j < 8; j++)
+            devices[i].id[j] = 0x00;
+ 326:	1c 92       	st	X, r1
+
+/******************************************************************************\
+|* Perform a 1-wire search on the identified buses. 
+|* Returns ONEWIRE_SEARCH_COMPLETE on success, ONEWIRE_SEARCH_FAILED on error
+\******************************************************************************/
+unsigned char oneWireSearchBuses(oneWireDevice * devices, 
+ 328:	df 01       	movw	r26, r30
+ 32a:	14 97       	sbiw	r26, 0x04	; 4
+	\**************************************************************************/
+    for (uint8_t i = 0; i < len; i++)
+    	{
+        devices[i].bus = 0x00;
+        for (uint8_t j = 0; j < 8; j++)
+            devices[i].id[j] = 0x00;
+ 32c:	1c 92       	st	X, r1
+
+/******************************************************************************\
+|* Perform a 1-wire search on the identified buses. 
+|* Returns ONEWIRE_SEARCH_COMPLETE on success, ONEWIRE_SEARCH_FAILED on error
+\******************************************************************************/
+unsigned char oneWireSearchBuses(oneWireDevice * devices, 
+ 32e:	df 01       	movw	r26, r30
+ 330:	13 97       	sbiw	r26, 0x03	; 3
+	\**************************************************************************/
+    for (uint8_t i = 0; i < len; i++)
+    	{
+        devices[i].bus = 0x00;
+        for (uint8_t j = 0; j < 8; j++)
+            devices[i].id[j] = 0x00;
+ 332:	1c 92       	st	X, r1
+
+/******************************************************************************\
+|* Perform a 1-wire search on the identified buses. 
+|* Returns ONEWIRE_SEARCH_COMPLETE on success, ONEWIRE_SEARCH_FAILED on error
+\******************************************************************************/
+unsigned char oneWireSearchBuses(oneWireDevice * devices, 
+ 334:	df 01       	movw	r26, r30
+ 336:	12 97       	sbiw	r26, 0x02	; 2
+	\**************************************************************************/
+    for (uint8_t i = 0; i < len; i++)
+    	{
+        devices[i].bus = 0x00;
+        for (uint8_t j = 0; j < 8; j++)
+            devices[i].id[j] = 0x00;
+ 338:	1c 92       	st	X, r1
+
+/******************************************************************************\
+|* Perform a 1-wire search on the identified buses. 
+|* Returns ONEWIRE_SEARCH_COMPLETE on success, ONEWIRE_SEARCH_FAILED on error
+\******************************************************************************/
+unsigned char oneWireSearchBuses(oneWireDevice * devices, 
+ 33a:	df 01       	movw	r26, r30
+ 33c:	11 97       	sbiw	r26, 0x01	; 1
+	\**************************************************************************/
+    for (uint8_t i = 0; i < len; i++)
+    	{
+        devices[i].bus = 0x00;
+        for (uint8_t j = 0; j < 8; j++)
+            devices[i].id[j] = 0x00;
+ 33e:	1c 92       	st	X, r1
+ 340:	10 82       	st	Z, r1
+								 unsigned char buses)
+	{
+	/**************************************************************************\
+	|* Initialize all addresses as zero, on bus 0 (does not exist).
+	\**************************************************************************/
+    for (uint8_t i = 0; i < len; i++)
+ 342:	9f 5f       	subi	r25, 0xFF	; 255
+ 344:	39 96       	adiw	r30, 0x09	; 9
+ 346:	96 13       	cpse	r25, r22
+ 348:	e3 cf       	rjmp	.-58     	; 0x310 <oneWireSearchBuses+0x26>
+    	}
+    
+	/**************************************************************************\
+	|* Find the buses with slave devices
+	\**************************************************************************/
+    uint8_t presence 	= oneWireDetectPresence(buses);
+ 34a:	aa df       	rcall	.-172    	; 0x2a0 <oneWireDetectPresence>
+ 34c:	98 2e       	mov	r9, r24
+    uint8_t numDevices  = 0;
+    uint8_t *newID  	= devices[0].id;
+ 34e:	e8 01       	movw	r28, r16
+ 350:	21 96       	adiw	r28, 0x01	; 1
+ 352:	68 94       	set
+ 354:	ee 24       	eor	r14, r14
+ 356:	e3 f8       	bld	r14, 3
+ 358:	f1 2c       	mov	r15, r1
+   
+	/**************************************************************************\
+	|* Go through all buses with slave devices
+	\**************************************************************************/
+    for (uint8_t currentBus = 0x01; currentBus; currentBus <<= 1)
+ 35a:	cc 24       	eor	r12, r12
+ 35c:	c3 94       	inc	r12
+    
+	/**************************************************************************\
+	|* Find the buses with slave devices
+	\**************************************************************************/
+    uint8_t presence 	= oneWireDetectPresence(buses);
+    uint8_t numDevices  = 0;
+ 35e:	d1 2c       	mov	r13, r1
+        uint8_t *currentID  	= newID;
+
+		/**********************************************************************\
+		|* Are any devices available on this bus
+		\**********************************************************************/
+        if (currentBus & presence)
+ 360:	81 2c       	mov	r8, r1
+			|* Do slave search on each bus, and place identifiers and 
+			|* corresponding bus "addresses" in the array.
+			\******************************************************************/
+            do  
+            	{
+                memcpy(newID, currentID, 8);
+ 362:	68 94       	set
+ 364:	aa 24       	eor	r10, r10
+ 366:	a3 f8       	bld	r10, 3
+        uint8_t *currentID  	= newID;
+
+		/**********************************************************************\
+		|* Are any devices available on this bus
+		\**********************************************************************/
+        if (currentBus & presence)
+ 368:	8c 2d       	mov	r24, r12
+ 36a:	89 21       	and	r24, r9
+ 36c:	b1 f1       	breq	.+108    	; 0x3da <oneWireSearchBuses+0xf0>
+ 36e:	ec 2f       	mov	r30, r28
+ 370:	fd 2f       	mov	r31, r29
+ 372:	b8 2c       	mov	r11, r8
+ 374:	01 c0       	rjmp	.+2      	; 0x378 <oneWireSearchBuses+0x8e>
+												   lastDeviation, 
+												   currentBus);
+                currentID 		= newID;
+                devices[numDevices].bus = currentBus;
+                numDevices++;
+                newID=devices[numDevices].id;                
+ 376:	e9 01       	movw	r28, r18
+			|* Do slave search on each bus, and place identifiers and 
+			|* corresponding bus "addresses" in the array.
+			\******************************************************************/
+            do  
+            	{
+                memcpy(newID, currentID, 8);
+ 378:	de 01       	movw	r26, r28
+ 37a:	8a 2d       	mov	r24, r10
+ 37c:	01 90       	ld	r0, Z+
+ 37e:	0d 92       	st	X+, r0
+ 380:	8a 95       	dec	r24
+ 382:	e1 f7       	brne	.-8      	; 0x37c <oneWireSearchBuses+0x92>
+                oneWireDetectPresence(currentBus);
+ 384:	8c 2d       	mov	r24, r12
+ 386:	8c df       	rcall	.-232    	; 0x2a0 <oneWireDetectPresence>
+				
+                lastDeviation 	= oneWireSearchRom(newID, 
+ 388:	4c 2d       	mov	r20, r12
+ 38a:	6b 2d       	mov	r22, r11
+ 38c:	ce 01       	movw	r24, r28
+ 38e:	1a df       	rcall	.-460    	; 0x1c4 <oneWireSearchRom>
+ 390:	b8 2e       	mov	r11, r24
+												   lastDeviation, 
+												   currentBus);
+                currentID 		= newID;
+                devices[numDevices].bus = currentBus;
+ 392:	2d 2d       	mov	r18, r13
+ 394:	30 e0       	ldi	r19, 0x00	; 0
+ 396:	f9 01       	movw	r30, r18
+ 398:	ee 0f       	add	r30, r30
+ 39a:	ff 1f       	adc	r31, r31
+ 39c:	ee 0f       	add	r30, r30
+ 39e:	ff 1f       	adc	r31, r31
+ 3a0:	ee 0f       	add	r30, r30
+ 3a2:	ff 1f       	adc	r31, r31
+ 3a4:	2e 0f       	add	r18, r30
+ 3a6:	3f 1f       	adc	r19, r31
+ 3a8:	f8 01       	movw	r30, r16
+ 3aa:	e2 0f       	add	r30, r18
+ 3ac:	f3 1f       	adc	r31, r19
+ 3ae:	c0 82       	st	Z, r12
+                numDevices++;
+ 3b0:	d3 94       	inc	r13
+                newID=devices[numDevices].id;                
+ 3b2:	2d 2d       	mov	r18, r13
+ 3b4:	30 e0       	ldi	r19, 0x00	; 0
+ 3b6:	c9 01       	movw	r24, r18
+ 3b8:	88 0f       	add	r24, r24
+ 3ba:	99 1f       	adc	r25, r25
+ 3bc:	88 0f       	add	r24, r24
+ 3be:	99 1f       	adc	r25, r25
+ 3c0:	88 0f       	add	r24, r24
+ 3c2:	99 1f       	adc	r25, r25
+ 3c4:	28 0f       	add	r18, r24
+ 3c6:	39 1f       	adc	r19, r25
+ 3c8:	20 0f       	add	r18, r16
+ 3ca:	31 1f       	adc	r19, r17
+ 3cc:	2f 5f       	subi	r18, 0xFF	; 255
+ 3ce:	3f 4f       	sbci	r19, 0xFF	; 255
+                oneWireDetectPresence(currentBus);
+				
+                lastDeviation 	= oneWireSearchRom(newID, 
+												   lastDeviation, 
+												   currentBus);
+                currentID 		= newID;
+ 3d0:	ec 2f       	mov	r30, r28
+ 3d2:	fd 2f       	mov	r31, r29
+                devices[numDevices].bus = currentBus;
+                numDevices++;
+                newID=devices[numDevices].id;                
+            	}  
+			while(lastDeviation != ONEWIRE_SEARCH_COMPLETE);            
+ 3d4:	b1 10       	cpse	r11, r1
+ 3d6:	cf cf       	rjmp	.-98     	; 0x376 <oneWireSearchBuses+0x8c>
+												   lastDeviation, 
+												   currentBus);
+                currentID 		= newID;
+                devices[numDevices].bus = currentBus;
+                numDevices++;
+                newID=devices[numDevices].id;                
+ 3d8:	e9 01       	movw	r28, r18
+    uint8_t *newID  	= devices[0].id;
+   
+	/**************************************************************************\
+	|* Go through all buses with slave devices
+	\**************************************************************************/
+    for (uint8_t currentBus = 0x01; currentBus; currentBus <<= 1)
+ 3da:	cc 0c       	add	r12, r12
+ 3dc:	81 e0       	ldi	r24, 0x01	; 1
+ 3de:	e8 1a       	sub	r14, r24
+ 3e0:	f1 08       	sbc	r15, r1
+ 3e2:	09 f0       	breq	.+2      	; 0x3e6 <oneWireSearchBuses+0xfc>
+ 3e4:	c1 cf       	rjmp	.-126    	; 0x368 <oneWireSearchBuses+0x7e>
+    	}
+
+		/**************************************************************************\
+	|* Go through all the devices and do CRC check
+	\**************************************************************************/
+    for (uint8_t i = 0; i < numDevices; i++)
+ 3e6:	dd 20       	and	r13, r13
+ 3e8:	69 f0       	breq	.+26     	; 0x404 <oneWireSearchBuses+0x11a>
+ 3ea:	c0 e0       	ldi	r28, 0x00	; 0
+    	{
+		/**********************************************************************\
+		|* If any id has a crc error, return error
+		\**********************************************************************/
+        if(oneWireRomCrc(devices[i].id) == ONEWIRE_ERROR)
+ 3ec:	c8 01       	movw	r24, r16
+ 3ee:	01 96       	adiw	r24, 0x01	; 1
+ 3f0:	42 de       	rcall	.-892    	; 0x76 <oneWireRomCrc>
+ 3f2:	81 30       	cpi	r24, 0x01	; 1
+ 3f4:	49 f0       	breq	.+18     	; 0x408 <oneWireSearchBuses+0x11e>
+    	}
+
+		/**************************************************************************\
+	|* Go through all the devices and do CRC check
+	\**************************************************************************/
+    for (uint8_t i = 0; i < numDevices; i++)
+ 3f6:	cf 5f       	subi	r28, 0xFF	; 255
+ 3f8:	07 5f       	subi	r16, 0xF7	; 247
+ 3fa:	1f 4f       	sbci	r17, 0xFF	; 255
+ 3fc:	cd 11       	cpse	r28, r13
+ 3fe:	f6 cf       	rjmp	.-20     	; 0x3ec <oneWireSearchBuses+0x102>
+			return ONEWIRE_SEARCH_FAILED;
+        	}
+    	}
+    // Else, return Successful.
+			//PORTA = 4;
+    return ONEWIRE_SEARCH_COMPLETE;
+ 400:	80 e0       	ldi	r24, 0x00	; 0
+ 402:	03 c0       	rjmp	.+6      	; 0x40a <oneWireSearchBuses+0x120>
+ 404:	80 e0       	ldi	r24, 0x00	; 0
+ 406:	01 c0       	rjmp	.+2      	; 0x40a <oneWireSearchBuses+0x120>
+		|* If any id has a crc error, return error
+		\**********************************************************************/
+        if(oneWireRomCrc(devices[i].id) == ONEWIRE_ERROR)
+            {
+			//PORTA = 1;
+			return ONEWIRE_SEARCH_FAILED;
+ 408:	8f ef       	ldi	r24, 0xFF	; 255
+        	}
+    	}
+    // Else, return Successful.
+			//PORTA = 4;
+    return ONEWIRE_SEARCH_COMPLETE;
+	}
+ 40a:	df 91       	pop	r29
+ 40c:	cf 91       	pop	r28
+ 40e:	1f 91       	pop	r17
+ 410:	0f 91       	pop	r16
+ 412:	ff 90       	pop	r15
+ 414:	ef 90       	pop	r14
+ 416:	df 90       	pop	r13
+ 418:	cf 90       	pop	r12
+ 41a:	bf 90       	pop	r11
+ 41c:	af 90       	pop	r10
+ 41e:	9f 90       	pop	r9
+ 420:	8f 90       	pop	r8
+ 422:	08 95       	ret
+
+00000424 <oneWireFindFamily>:
+|* Return a pointer to a one-wire descriptor that matches a given family id
+\******************************************************************************/
+oneWireDevice * oneWireFindFamily(unsigned char familyID, 
+								  oneWireDevice * devices, 
+								  unsigned char size)
+	{
+ 424:	fb 01       	movw	r30, r22
+	uint8_t i = 0;
+	/**************************************************************************\
+	|* Search through the array
+	\**************************************************************************/
+    while (i < size)
+ 426:	44 23       	and	r20, r20
+ 428:	79 f0       	breq	.+30     	; 0x448 <oneWireFindFamily+0x24>
+    	{
+        // Return the pointer if there is a family id match.
+        if ((*devices).id[0] == familyID)
+ 42a:	91 81       	ldd	r25, Z+1	; 0x01
+ 42c:	98 17       	cp	r25, r24
+ 42e:	71 f0       	breq	.+28     	; 0x44c <oneWireFindFamily+0x28>
+\******************************************************************************/
+oneWireDevice * oneWireFindFamily(unsigned char familyID, 
+								  oneWireDevice * devices, 
+								  unsigned char size)
+	{
+	uint8_t i = 0;
+ 430:	90 e0       	ldi	r25, 0x00	; 0
+ 432:	03 c0       	rjmp	.+6      	; 0x43a <oneWireFindFamily+0x16>
+	|* Search through the array
+	\**************************************************************************/
+    while (i < size)
+    	{
+        // Return the pointer if there is a family id match.
+        if ((*devices).id[0] == familyID)
+ 434:	21 81       	ldd	r18, Z+1	; 0x01
+ 436:	28 17       	cp	r18, r24
+ 438:	49 f0       	breq	.+18     	; 0x44c <oneWireFindFamily+0x28>
+            return devices;
+        devices++;
+ 43a:	39 96       	adiw	r30, 0x09	; 9
+        i++;
+ 43c:	9f 5f       	subi	r25, 0xFF	; 255
+	{
+	uint8_t i = 0;
+	/**************************************************************************\
+	|* Search through the array
+	\**************************************************************************/
+    while (i < size)
+ 43e:	94 13       	cpse	r25, r20
+ 440:	f9 cf       	rjmp	.-14     	; 0x434 <oneWireFindFamily+0x10>
+    	}
+
+	/**************************************************************************\
+	|* Couldn't find it
+	\**************************************************************************/
+    return NULL;
+ 442:	e0 e0       	ldi	r30, 0x00	; 0
+ 444:	f0 e0       	ldi	r31, 0x00	; 0
+ 446:	02 c0       	rjmp	.+4      	; 0x44c <oneWireFindFamily+0x28>
+ 448:	e0 e0       	ldi	r30, 0x00	; 0
+ 44a:	f0 e0       	ldi	r31, 0x00	; 0
+	}
+ 44c:	8e 2f       	mov	r24, r30
+ 44e:	9f 2f       	mov	r25, r31
+ 450:	08 95       	ret
+
+00000452 <init_Timer_OOK>:
+	 * WGM01 is set to work in CTC mode,
+	 * OCIE0A to enable OCR0A interrupts.
+	 * CS01 and CS00 gives a prescaler of 64, meaning an effective clock frequency of
+	 * 8M/64 = 125 kHz. With OCR0A set to
+	 * 66 this means an interrupt every 1/125k = 8 us --> (67 + 1)*8 = 544 us. */
+	TCCR0A = 1<<WGM01;
+ 452:	82 e0       	ldi	r24, 0x02	; 2
+ 454:	8a bd       	out	0x2a, r24	; 42
+	TIMSK |= 1<<OCIE0A;
+ 456:	89 b7       	in	r24, 0x39	; 57
+ 458:	80 61       	ori	r24, 0x10	; 16
+ 45a:	89 bf       	out	0x39, r24	; 57
+	OCR0A=67;
+ 45c:	83 e4       	ldi	r24, 0x43	; 67
+ 45e:	89 bd       	out	0x29, r24	; 41
+	TCCR0B |= (1<<CS01 | 1<<CS00);
+ 460:	83 b7       	in	r24, 0x33	; 51
+ 462:	83 60       	ori	r24, 0x03	; 3
+ 464:	83 bf       	out	0x33, r24	; 51
+ 466:	08 95       	ret
+
+00000468 <__vector_10>:
+		_delay_ms(20000);
+	}
+  return 1;
+}
+
+ISR(TIMER0_COMPA_vect){
+ 468:	1f 92       	push	r1
+ 46a:	0f 92       	push	r0
+ 46c:	0f b6       	in	r0, 0x3f	; 63
+ 46e:	0f 92       	push	r0
+ 470:	11 24       	eor	r1, r1
+ 472:	2f 93       	push	r18
+ 474:	3f 93       	push	r19
+ 476:	4f 93       	push	r20
+ 478:	8f 93       	push	r24
+ 47a:	9f 93       	push	r25
+	uint16_t PACKET=1;
+	if (SEND_bit < 8) PACKET = ID;
+ 47c:	20 91 65 00 	lds	r18, 0x0065
+ 480:	28 30       	cpi	r18, 0x08	; 8
+ 482:	18 f0       	brcs	.+6      	; 0x48a <__vector_10+0x22>
+	}
+  return 1;
+}
+
+ISR(TIMER0_COMPA_vect){
+	uint16_t PACKET=1;
+ 484:	81 e0       	ldi	r24, 0x01	; 1
+ 486:	90 e0       	ldi	r25, 0x00	; 0
+ 488:	02 c0       	rjmp	.+4      	; 0x48e <__vector_10+0x26>
+	if (SEND_bit < 8) PACKET = ID;
+ 48a:	8f e5       	ldi	r24, 0x5F	; 95
+ 48c:	90 e0       	ldi	r25, 0x00	; 0
+	if (SEND_bit >= 8 && SEND_bit < 16) PACKET = INFO;
+ 48e:	32 2f       	mov	r19, r18
+ 490:	38 50       	subi	r19, 0x08	; 8
+ 492:	38 30       	cpi	r19, 0x08	; 8
+ 494:	10 f4       	brcc	.+4      	; 0x49a <__vector_10+0x32>
+ 496:	80 e0       	ldi	r24, 0x00	; 0
+ 498:	90 e0       	ldi	r25, 0x00	; 0
+	if (SEND_bit >= 16 && SEND_bit < 32) PACKET = TEMP;
+ 49a:	32 2f       	mov	r19, r18
+ 49c:	30 51       	subi	r19, 0x10	; 16
+ 49e:	30 31       	cpi	r19, 0x10	; 16
+ 4a0:	20 f4       	brcc	.+8      	; 0x4aa <__vector_10+0x42>
+ 4a2:	80 91 60 00 	lds	r24, 0x0060
+ 4a6:	90 91 61 00 	lds	r25, 0x0061
+	if (SEND_bit >= 32 && SEND_bit < 40) PACKET = HUMI;
+ 4aa:	32 2f       	mov	r19, r18
+ 4ac:	30 52       	subi	r19, 0x20	; 32
+ 4ae:	38 30       	cpi	r19, 0x08	; 8
+ 4b0:	10 f4       	brcc	.+4      	; 0x4b6 <__vector_10+0x4e>
+ 4b2:	8e e6       	ldi	r24, 0x6E	; 110
+ 4b4:	90 e0       	ldi	r25, 0x00	; 0
+	if (SEND_bit >= 40) PACKET = FOOTER;
+ 4b6:	28 32       	cpi	r18, 0x28	; 40
+ 4b8:	10 f0       	brcs	.+4      	; 0x4be <__vector_10+0x56>
+ 4ba:	88 eb       	ldi	r24, 0xB8	; 184
+ 4bc:	90 e0       	ldi	r25, 0x00	; 0
+
+	if ((OOK_bit == 0) && REPEAT){
+ 4be:	20 91 66 00 	lds	r18, 0x0066
+ 4c2:	21 11       	cpse	r18, r1
+ 4c4:	5a c0       	rjmp	.+180    	; 0x57a <__vector_10+0x112>
+ 4c6:	20 91 8c 00 	lds	r18, 0x008C
+ 4ca:	22 23       	and	r18, r18
+ 4cc:	09 f4       	brne	.+2      	; 0x4d0 <__vector_10+0x68>
+ 4ce:	55 c0       	rjmp	.+170    	; 0x57a <__vector_10+0x112>
+		PORTB |= SENDER_PIN; // HIGH during first OOK
+ 4d0:	c4 9a       	sbi	0x18, 4	; 24
+		//Get the value of the bit to be sent
+		if (PACKET & (SHIFT_MASK>>SEND_shift)) {
+ 4d2:	40 91 64 00 	lds	r20, 0x0064
+ 4d6:	20 91 62 00 	lds	r18, 0x0062
+ 4da:	30 91 63 00 	lds	r19, 0x0063
+ 4de:	04 2e       	mov	r0, r20
+ 4e0:	02 c0       	rjmp	.+4      	; 0x4e6 <__vector_10+0x7e>
+ 4e2:	36 95       	lsr	r19
+ 4e4:	27 95       	ror	r18
+ 4e6:	0a 94       	dec	r0
+ 4e8:	e2 f7       	brpl	.-8      	; 0x4e2 <__vector_10+0x7a>
+ 4ea:	82 23       	and	r24, r18
+ 4ec:	93 23       	and	r25, r19
+ 4ee:	89 2b       	or	r24, r25
+ 4f0:	21 f0       	breq	.+8      	; 0x4fa <__vector_10+0x92>
+			MAX_OOK = 9;
+ 4f2:	89 e0       	ldi	r24, 0x09	; 9
+ 4f4:	80 93 8b 00 	sts	0x008B, r24
+ 4f8:	03 c0       	rjmp	.+6      	; 0x500 <__vector_10+0x98>
+		} else {
+			MAX_OOK = 4;
+ 4fa:	84 e0       	ldi	r24, 0x04	; 4
+ 4fc:	80 93 8b 00 	sts	0x008B, r24
+		}
+
+		SEND_bit++;
+ 500:	80 91 65 00 	lds	r24, 0x0065
+ 504:	8f 5f       	subi	r24, 0xFF	; 255
+ 506:	80 93 65 00 	sts	0x0065, r24
+		SEND_shift++;
+		if (SEND_bit == 8) SEND_shift = 0;
+ 50a:	88 30       	cpi	r24, 0x08	; 8
+ 50c:	19 f4       	brne	.+6      	; 0x514 <__vector_10+0xac>
+ 50e:	10 92 64 00 	sts	0x0064, r1
+ 512:	12 c0       	rjmp	.+36     	; 0x538 <__vector_10+0xd0>
+		if (SEND_bit == 14) {
+ 514:	8e 30       	cpi	r24, 0x0E	; 14
+ 516:	21 f0       	breq	.+8      	; 0x520 <__vector_10+0xb8>
+		} else {
+			MAX_OOK = 4;
+		}
+
+		SEND_bit++;
+		SEND_shift++;
+ 518:	4f 5f       	subi	r20, 0xFF	; 255
+ 51a:	40 93 64 00 	sts	0x0064, r20
+ 51e:	0c c0       	rjmp	.+24     	; 0x538 <__vector_10+0xd0>
+		if (SEND_bit == 8) SEND_shift = 0;
+		if (SEND_bit == 14) {
+			SEND_shift = 6;
+ 520:	86 e0       	ldi	r24, 0x06	; 6
+ 522:	80 93 64 00 	sts	0x0064, r24
+			SEND_bit = 22;
+ 526:	86 e1       	ldi	r24, 0x16	; 22
+ 528:	80 93 65 00 	sts	0x0065, r24
+			SHIFT_MASK=0x8000;
+ 52c:	80 e0       	ldi	r24, 0x00	; 0
+ 52e:	90 e8       	ldi	r25, 0x80	; 128
+ 530:	90 93 63 00 	sts	0x0063, r25
+ 534:	80 93 62 00 	sts	0x0062, r24
+		}
+		if (SEND_bit == 32) {
+ 538:	80 91 65 00 	lds	r24, 0x0065
+ 53c:	80 32       	cpi	r24, 0x20	; 32
+ 53e:	49 f4       	brne	.+18     	; 0x552 <__vector_10+0xea>
+			SEND_shift = 0;
+ 540:	10 92 64 00 	sts	0x0064, r1
+			SHIFT_MASK = 0x80;
+ 544:	80 e8       	ldi	r24, 0x80	; 128
+ 546:	90 e0       	ldi	r25, 0x00	; 0
+ 548:	90 93 63 00 	sts	0x0063, r25
+ 54c:	80 93 62 00 	sts	0x0062, r24
+ 550:	15 c0       	rjmp	.+42     	; 0x57c <__vector_10+0x114>
+		}
+		if (SEND_bit == 40) SEND_shift = 0;
+ 552:	88 32       	cpi	r24, 0x28	; 40
+ 554:	19 f4       	brne	.+6      	; 0x55c <__vector_10+0xf4>
+ 556:	10 92 64 00 	sts	0x0064, r1
+ 55a:	10 c0       	rjmp	.+32     	; 0x57c <__vector_10+0x114>
+		if (SEND_bit == 45){ //one extra as footer
+ 55c:	8d 32       	cpi	r24, 0x2D	; 45
+ 55e:	71 f4       	brne	.+28     	; 0x57c <__vector_10+0x114>
+			REPEAT--;
+ 560:	80 91 8c 00 	lds	r24, 0x008C
+ 564:	81 50       	subi	r24, 0x01	; 1
+ 566:	80 93 8c 00 	sts	0x008C, r24
+			SEND_shift = 0;
+ 56a:	10 92 64 00 	sts	0x0064, r1
+			SEND_bit = 0;
+ 56e:	10 92 65 00 	sts	0x0065, r1
+			MAX_OOK=18;
+ 572:	82 e1       	ldi	r24, 0x12	; 18
+ 574:	80 93 8b 00 	sts	0x008B, r24
+ 578:	01 c0       	rjmp	.+2      	; 0x57c <__vector_10+0x114>
+		}
+	}else {
+		PORTB &= ~SENDER_PIN;
+ 57a:	c4 98       	cbi	0x18, 4	; 24
+	}
+	OOK_bit++;
+ 57c:	80 91 66 00 	lds	r24, 0x0066
+ 580:	8f 5f       	subi	r24, 0xFF	; 255
+ 582:	80 93 66 00 	sts	0x0066, r24
+	if (OOK_bit == MAX_OOK) OOK_bit = 0;
+ 586:	90 91 8b 00 	lds	r25, 0x008B
+ 58a:	89 13       	cpse	r24, r25
+ 58c:	02 c0       	rjmp	.+4      	; 0x592 <__vector_10+0x12a>
+ 58e:	10 92 66 00 	sts	0x0066, r1
+
+}
+ 592:	9f 91       	pop	r25
+ 594:	8f 91       	pop	r24
+ 596:	4f 91       	pop	r20
+ 598:	3f 91       	pop	r19
+ 59a:	2f 91       	pop	r18
+ 59c:	0f 90       	pop	r0
+ 59e:	0f be       	out	0x3f, r0	; 63
+ 5a0:	0f 90       	pop	r0
+ 5a2:	1f 90       	pop	r1
+ 5a4:	18 95       	reti
+
+000005a6 <ds18b20ReadTemperature>:
+
+
+int16_t ds18b20ReadTemperature(uint8_t bus, uint8_t * id)
+{
+ 5a6:	1f 93       	push	r17
+ 5a8:	cf 93       	push	r28
+ 5aa:	df 93       	push	r29
+ 5ac:	18 2f       	mov	r17, r24
+ 5ae:	eb 01       	movw	r28, r22
+	int16_t temperature;
+
+	// Reset, presence.
+	if (!oneWireDetectPresence(bus))
+ 5b0:	77 de       	rcall	.-786    	; 0x2a0 <oneWireDetectPresence>
+ 5b2:	88 23       	and	r24, r24
+ 5b4:	f9 f0       	breq	.+62     	; 0x5f4 <ds18b20ReadTemperature+0x4e>
+	return DS18B20_ERROR;
+
+	// Match the id found earlier.
+	oneWireMatchRom(id, bus);
+ 5b6:	61 2f       	mov	r22, r17
+ 5b8:	ce 01       	movw	r24, r28
+ 5ba:	ce dd       	rcall	.-1124   	; 0x158 <oneWireMatchRom>
+
+	// Send start conversion command.
+	oneWireSendByte(DS18B20_START_CONVERSION, bus);
+ 5bc:	61 2f       	mov	r22, r17
+ 5be:	84 e4       	ldi	r24, 0x44	; 68
+ 5c0:	b7 dd       	rcall	.-1170   	; 0x130 <oneWireSendByte>
+	#ifdef ONEWIRE_USE_PARASITIC_POWER
+	ONEWIRE_RELEASE_BUS(bus);
+	_delay_ms(850);
+
+	#else
+	while (!oneWireReadBit(bus))
+ 5c2:	81 2f       	mov	r24, r17
+ 5c4:	e1 dd       	rcall	.-1086   	; 0x188 <oneWireReadBit>
+ 5c6:	88 23       	and	r24, r24
+ 5c8:	e1 f3       	breq	.-8      	; 0x5c2 <ds18b20ReadTemperature+0x1c>
+	;
+	#endif
+	// Reset, presence.
+	if(!oneWireDetectPresence(bus))
+ 5ca:	81 2f       	mov	r24, r17
+ 5cc:	69 de       	rcall	.-814    	; 0x2a0 <oneWireDetectPresence>
+ 5ce:	88 23       	and	r24, r24
+ 5d0:	a1 f0       	breq	.+40     	; 0x5fa <ds18b20ReadTemperature+0x54>
+	return DS18B20_ERROR;
+
+	// Match id again.
+	oneWireMatchRom(id, bus);
+ 5d2:	61 2f       	mov	r22, r17
+ 5d4:	ce 01       	movw	r24, r28
+ 5d6:	c0 dd       	rcall	.-1152   	; 0x158 <oneWireMatchRom>
+
+	// Send READ SCRATCHPAD command.
+	oneWireSendByte(DS18B20_READ_SCRATCHPAD, bus);
+ 5d8:	61 2f       	mov	r22, r17
+ 5da:	8e eb       	ldi	r24, 0xBE	; 190
+ 5dc:	a9 dd       	rcall	.-1198   	; 0x130 <oneWireSendByte>
+
+	// Read only two first bytes (temperature low, temperature high)
+	// and place them in the 16 bit temperature variable.
+	temperature = oneWireReceiveByte(bus);
+ 5de:	81 2f       	mov	r24, r17
+ 5e0:	4d de       	rcall	.-870    	; 0x27c <oneWireReceiveByte>
+ 5e2:	c8 2f       	mov	r28, r24
+ 5e4:	d0 e0       	ldi	r29, 0x00	; 0
+	temperature |= (oneWireReceiveByte(bus) << 8);
+ 5e6:	81 2f       	mov	r24, r17
+ 5e8:	49 de       	rcall	.-878    	; 0x27c <oneWireReceiveByte>
+ 5ea:	38 2f       	mov	r19, r24
+ 5ec:	20 e0       	ldi	r18, 0x00	; 0
+ 5ee:	2c 2b       	or	r18, r28
+ 5f0:	3d 2b       	or	r19, r29
+
+	return temperature;
+ 5f2:	05 c0       	rjmp	.+10     	; 0x5fe <ds18b20ReadTemperature+0x58>
+{
+	int16_t temperature;
+
+	// Reset, presence.
+	if (!oneWireDetectPresence(bus))
+	return DS18B20_ERROR;
+ 5f4:	28 e1       	ldi	r18, 0x18	; 24
+ 5f6:	3c ef       	ldi	r19, 0xFC	; 252
+ 5f8:	02 c0       	rjmp	.+4      	; 0x5fe <ds18b20ReadTemperature+0x58>
+	while (!oneWireReadBit(bus))
+	;
+	#endif
+	// Reset, presence.
+	if(!oneWireDetectPresence(bus))
+	return DS18B20_ERROR;
+ 5fa:	28 e1       	ldi	r18, 0x18	; 24
+ 5fc:	3c ef       	ldi	r19, 0xFC	; 252
+	// and place them in the 16 bit temperature variable.
+	temperature = oneWireReceiveByte(bus);
+	temperature |= (oneWireReceiveByte(bus) << 8);
+
+	return temperature;
+ 5fe:	82 2f       	mov	r24, r18
+ 600:	93 2f       	mov	r25, r19
+ 602:	df 91       	pop	r29
+ 604:	cf 91       	pop	r28
+ 606:	1f 91       	pop	r17
+ 608:	08 95       	ret
+
+0000060a <main>:
+}
+
+int main (void)
+{
+	signed int temp = 0;
+	cli();
+ 60a:	f8 94       	cli
+		DDRB |= SENDER_PIN; // PB4 for the sender or Control LED
+ 60c:	bc 9a       	sbi	0x17, 4	; 23
+		DDRB &= ~(0x08); //PB3 as input
+ 60e:	bb 98       	cbi	0x17, 3	; 23
+		static oneWireDevice devices[MAX_DEVICES];
+		oneWireDevice *ds18b20;
+		init_Timer_OOK();
+ 610:	20 df       	rcall	.-448    	; 0x452 <init_Timer_OOK>
+		oneWireInit(BUS);
+ 612:	88 e0       	ldi	r24, 0x08	; 8
+ 614:	4f dd       	rcall	.-1378   	; 0xb4 <oneWireInit>
+		while (oneWireSearchBuses(devices, MAX_DEVICES, BUS) != ONEWIRE_SEARCH_COMPLETE);
+ 616:	48 e0       	ldi	r20, 0x08	; 8
+ 618:	64 e0       	ldi	r22, 0x04	; 4
+ 61a:	87 e6       	ldi	r24, 0x67	; 103
+ 61c:	90 e0       	ldi	r25, 0x00	; 0
+ 61e:	65 de       	rcall	.-822    	; 0x2ea <oneWireSearchBuses>
+ 620:	81 11       	cpse	r24, r1
+ 622:	f9 cf       	rjmp	.-14     	; 0x616 <main+0xc>
+		ds18b20 = oneWireFindFamily(DS18B20_FAMILY_ID, devices, MAX_DEVICES);
+ 624:	44 e0       	ldi	r20, 0x04	; 4
+ 626:	67 e6       	ldi	r22, 0x67	; 103
+ 628:	70 e0       	ldi	r23, 0x00	; 0
+ 62a:	88 e2       	ldi	r24, 0x28	; 40
+ 62c:	fb de       	rcall	.-522    	; 0x424 <oneWireFindFamily>
+ 62e:	ec 01       	movw	r28, r24
+	sei();
+ 630:	78 94       	sei
+
+	while (1) {
+		if (ds18b20 != NULL){
+			temp 	= ds18b20ReadTemperature(ds18b20->bus, ds18b20->id);
+ 632:	7c 01       	movw	r14, r24
+ 634:	2f ef       	ldi	r18, 0xFF	; 255
+ 636:	e2 1a       	sub	r14, r18
+ 638:	f2 0a       	sbc	r15, r18
+			uint16_t fraction	= 625* (temp & 0x0f);
+			TEMP = (temp >> 4)*10+(fraction/1000);
+ 63a:	08 ee       	ldi	r16, 0xE8	; 232
+ 63c:	13 e0       	ldi	r17, 0x03	; 3
+			REPEAT = MAX_REPEATS;
+ 63e:	0f 2e       	mov	r0, r31
+ 640:	f4 e1       	ldi	r31, 0x14	; 20
+ 642:	df 2e       	mov	r13, r31
+ 644:	f0 2d       	mov	r31, r0
+		while (oneWireSearchBuses(devices, MAX_DEVICES, BUS) != ONEWIRE_SEARCH_COMPLETE);
+		ds18b20 = oneWireFindFamily(DS18B20_FAMILY_ID, devices, MAX_DEVICES);
+	sei();
+
+	while (1) {
+		if (ds18b20 != NULL){
+ 646:	20 97       	sbiw	r28, 0x00	; 0
+ 648:	21 f1       	breq	.+72     	; 0x692 <main+0x88>
+			temp 	= ds18b20ReadTemperature(ds18b20->bus, ds18b20->id);
+ 64a:	b7 01       	movw	r22, r14
+ 64c:	88 81       	ld	r24, Y
+ 64e:	ab df       	rcall	.-170    	; 0x5a6 <ds18b20ReadTemperature>
+ 650:	9c 01       	movw	r18, r24
+			uint16_t fraction	= 625* (temp & 0x0f);
+ 652:	8f 70       	andi	r24, 0x0F	; 15
+ 654:	99 27       	eor	r25, r25
+ 656:	61 e7       	ldi	r22, 0x71	; 113
+ 658:	72 e0       	ldi	r23, 0x02	; 2
+ 65a:	26 d0       	rcall	.+76     	; 0x6a8 <__mulhi3>
+			TEMP = (temp >> 4)*10+(fraction/1000);
+ 65c:	b8 01       	movw	r22, r16
+ 65e:	36 d0       	rcall	.+108    	; 0x6cc <__udivmodhi4>
+ 660:	35 95       	asr	r19
+ 662:	27 95       	ror	r18
+ 664:	35 95       	asr	r19
+ 666:	27 95       	ror	r18
+ 668:	35 95       	asr	r19
+ 66a:	27 95       	ror	r18
+ 66c:	35 95       	asr	r19
+ 66e:	27 95       	ror	r18
+ 670:	c9 01       	movw	r24, r18
+ 672:	88 0f       	add	r24, r24
+ 674:	99 1f       	adc	r25, r25
+ 676:	88 0f       	add	r24, r24
+ 678:	99 1f       	adc	r25, r25
+ 67a:	28 0f       	add	r18, r24
+ 67c:	39 1f       	adc	r19, r25
+ 67e:	22 0f       	add	r18, r18
+ 680:	33 1f       	adc	r19, r19
+ 682:	62 0f       	add	r22, r18
+ 684:	73 1f       	adc	r23, r19
+ 686:	70 93 61 00 	sts	0x0061, r23
+ 68a:	60 93 60 00 	sts	0x0060, r22
+			REPEAT = MAX_REPEATS;
+ 68e:	d0 92 8c 00 	sts	0x008C, r13
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 692:	3a ea       	ldi	r19, 0xAA	; 170
+ 694:	86 ee       	ldi	r24, 0xE6	; 230
+ 696:	96 e9       	ldi	r25, 0x96	; 150
+ 698:	21 e0       	ldi	r18, 0x01	; 1
+ 69a:	31 50       	subi	r19, 0x01	; 1
+ 69c:	80 40       	sbci	r24, 0x00	; 0
+ 69e:	90 40       	sbci	r25, 0x00	; 0
+ 6a0:	20 40       	sbci	r18, 0x00	; 0
+ 6a2:	d9 f7       	brne	.-10     	; 0x69a <main+0x90>
+ 6a4:	00 00       	nop
+ 6a6:	cf cf       	rjmp	.-98     	; 0x646 <main+0x3c>
+
+000006a8 <__mulhi3>:
+ 6a8:	55 27       	eor	r21, r21
+ 6aa:	00 24       	eor	r0, r0
+
+000006ac <__mulhi3_loop>:
+ 6ac:	80 ff       	sbrs	r24, 0
+ 6ae:	02 c0       	rjmp	.+4      	; 0x6b4 <__mulhi3_skip1>
+ 6b0:	06 0e       	add	r0, r22
+ 6b2:	57 1f       	adc	r21, r23
+
+000006b4 <__mulhi3_skip1>:
+ 6b4:	66 0f       	add	r22, r22
+ 6b6:	77 1f       	adc	r23, r23
+ 6b8:	61 15       	cp	r22, r1
+ 6ba:	71 05       	cpc	r23, r1
+ 6bc:	21 f0       	breq	.+8      	; 0x6c6 <__mulhi3_exit>
+ 6be:	96 95       	lsr	r25
+ 6c0:	87 95       	ror	r24
+ 6c2:	00 97       	sbiw	r24, 0x00	; 0
+ 6c4:	99 f7       	brne	.-26     	; 0x6ac <__mulhi3_loop>
+
+000006c6 <__mulhi3_exit>:
+ 6c6:	95 2f       	mov	r25, r21
+ 6c8:	80 2d       	mov	r24, r0
+ 6ca:	08 95       	ret
+
+000006cc <__udivmodhi4>:
+ 6cc:	aa 1b       	sub	r26, r26
+ 6ce:	bb 1b       	sub	r27, r27
+ 6d0:	51 e1       	ldi	r21, 0x11	; 17
+ 6d2:	07 c0       	rjmp	.+14     	; 0x6e2 <__udivmodhi4_ep>
+
+000006d4 <__udivmodhi4_loop>:
+ 6d4:	aa 1f       	adc	r26, r26
+ 6d6:	bb 1f       	adc	r27, r27
+ 6d8:	a6 17       	cp	r26, r22
+ 6da:	b7 07       	cpc	r27, r23
+ 6dc:	10 f0       	brcs	.+4      	; 0x6e2 <__udivmodhi4_ep>
+ 6de:	a6 1b       	sub	r26, r22
+ 6e0:	b7 0b       	sbc	r27, r23
+
+000006e2 <__udivmodhi4_ep>:
+ 6e2:	88 1f       	adc	r24, r24
+ 6e4:	99 1f       	adc	r25, r25
+ 6e6:	5a 95       	dec	r21
+ 6e8:	a9 f7       	brne	.-22     	; 0x6d4 <__udivmodhi4_loop>
+ 6ea:	80 95       	com	r24
+ 6ec:	90 95       	com	r25
+ 6ee:	bc 01       	movw	r22, r24
+ 6f0:	cd 01       	movw	r24, r26
+ 6f2:	08 95       	ret
+
+000006f4 <_exit>:
+ 6f4:	f8 94       	cli
+
+000006f6 <__stop_program>:
+ 6f6:	ff cf       	rjmp	.-2      	; 0x6f6 <__stop_program>

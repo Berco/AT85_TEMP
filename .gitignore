@@ -1,0 +1,17 @@
+Debug/*.d
+Debug/*.eep
+Debug/*.elf
+Debug/*.lss
+Debug/*.map
+Debug/*.o
+Debug/*.srec
+Release/*.d
+Release/*.eep
+Release/*.elf
+Release/*.lss
+Release/*.map
+Release/*.o
+Release/*.srec
+*.atsln
+*.atsuo
+*.cproj
